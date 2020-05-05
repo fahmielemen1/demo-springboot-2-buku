@@ -10,10 +10,9 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-//anotasi @RestController untuk menandakan bahwa class ini merupakan controller
-
 @RequestMapping("/buku")
 public class BukuController {
+
     @Autowired
     BukuRepository bukuRepository;
 
@@ -23,21 +22,22 @@ public class BukuController {
     }
 
     @PostMapping("/")
-    public ModelBuku tambahbuku(@Valid @RequestBody ModelBuku buku){
-        return bukuRepository.save(buku);
+    public ModelBuku tambahbuku(@Valid @RequestBody ModelBuku modelBuku){
+        return bukuRepository.save(modelBuku);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ModelBuku> updateBuku(@PathVariable(value = "id")Long id,
-//                                                @Valid @RequestBody ModelBuku detailbuku){
-//        ModelBuku buku = bukuRepository.findOne(id);
-//        if (buku == null)
-//            return ResponseEntity.notFound().build();
-//        buku.setTitleBook(detailbuku.getTitleBook());
-//        buku.setNamaDepanPengarang(detailbuku.getNamaDepanPengarang());
-//        buku.setNamaBelakangPengarang(detailbuku.getNamaBelakangPengarang());
-//        buku.setNamaPeminjam(detailbuku.getNamaPeminjam());
-//        buku.setStatusPeminjaman(detailbuku.getStatusPeminjaman());
-//        ModelBuku updatedBuku = bukuRepository.save(buku);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ModelBuku> updateBuku(@PathVariable(value = "id")Long id,
+                                                @Valid @RequestBody ModelBuku detailbuku){
+        ModelBuku buku = bukuRepository.findById();
+        if (buku == null)
+            return ResponseEntity.notFound().build();
+        buku.setTitleBook(detailbuku.getTitleBook());
+        buku.setNamaDepanPengarang(detailbuku.getNamaDepanPengarang());
+        buku.setNamaBelakangPengarang(detailbuku.getNamaBelakangPengarang());
+        buku.setNamaPeminjam(detailbuku.getNamaPeminjam());
+        buku.setStatusPeminjaman(detailbuku.getStatusPeminjaman());
+        ModelBuku updatedBuku = bukuRepository.save(buku);
+        return ResponseEntity.ok(updatedBuku);
+    }
 }

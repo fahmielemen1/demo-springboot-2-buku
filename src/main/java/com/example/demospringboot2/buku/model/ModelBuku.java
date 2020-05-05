@@ -12,7 +12,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "books")
-//@Table digunakan untuk membuat table baru dengan nama “books”
 @EntityListeners(AuditingEntityListener.class)
 //@EntityListeners(AuditingEntityListener.class) merupakan entity dari JPA yang digunakan untuk meng-update data
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, allowGetters = true)
@@ -21,7 +20,6 @@ import java.util.Date;
 
 public class ModelBuku implements Serializable {
     @Id
-//    @Id digunakan untuk memdefinisikan primary key
     @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
     private Long id;
 
@@ -34,7 +32,7 @@ public class ModelBuku implements Serializable {
     @NotBlank
     private String namaBelakangPengarang;
 
-    @NotBlank
+//    @NotBlank
     private int statusPeminjaman;
 
     @NotBlank
